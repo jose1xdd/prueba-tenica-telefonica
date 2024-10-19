@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: telefonica
+  datasource:
+    url: ${JDBC_URL}
+    username: ${DB_USER}
+    password: ${DB_PASS}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    show-sql: true
+  server:
+    port: ${PORT}
+
+controller:
+  properties:
+    base-path: /prueba-tecnica/v1/@project.name@

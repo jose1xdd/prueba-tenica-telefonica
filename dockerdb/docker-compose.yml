@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql_container
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword   # Contraseña del usuario root
+      MYSQL_DATABASE: test                # Nombre de la base de datos que deseas crear
+      MYSQL_USER: user                    # Usuario que puede acceder a la base de datos
+      MYSQL_PASSWORD: userpassword        # Contraseña del usuario
+    ports:
+      - "3306:3306"                       # Mapea el puerto 3306 en el contenedor al puerto 3306 en tu máquina
+    volumes:
+      - mysql_data:/var/lib/mysql          # Para persistencia de datos
+
+volumes:
+  mysql_data:
