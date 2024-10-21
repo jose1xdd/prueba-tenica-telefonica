@@ -1,0 +1,1 @@
+Se deja de documentacion la especificacion OPEN API y un dockercompose para la base de datos 

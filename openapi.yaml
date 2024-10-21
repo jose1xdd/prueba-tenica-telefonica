@@ -1,0 +1,160 @@
+openapi: 3.0.3
+info:
+  title: Prueba Estudiante API
+  description: API para gestionar información de estudiantes.
+  version: 1.0.0
+  contact:
+    name: Soporte Telefónica
+    email: soporte@telefonica.com
+servers:
+  - url: /{basePath}
+    description: Servidor de la API.
+    variables:
+      basePath:
+        default: api/v1/estudiantes
+
+paths:
+  /create:
+    post:
+      summary: Crear un estudiante
+      operationId: createEstudiante
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PruebaEstudianteRequest'
+      responses:
+        '201':
+          description: Estudiante creado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PruebaEstudianteDto'
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+
+  /{idPrueba}:
+    get:
+      summary: Obtener estudiante por ID
+      operationId: getEstudianteById
+      parameters:
+        - name: idPrueba
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID del estudiante.
+      responses:
+        '200':
+          description: Estudiante obtenido exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PruebaEstudianteDto'
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+
+    put:
+      summary: Actualizar estudiante por ID
+      operationId: updateEstudianteById
+      parameters:
+        - name: idPrueba
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID del estudiante.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PruebaEstudianteRequest'
+      responses:
+        '200':
+          description: Estudiante actualizado exitosamente.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PruebaEstudianteDto'
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+
+    delete:
+      summary: Eliminar estudiante por ID
+      operationId: deleteEstudianteById
+      parameters:
+        - name: idPrueba
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: ID del estudiante.
+      responses:
+        '200':
+          description: Estudiante eliminado exitosamente.
+        '500':
+          description: Error interno del servidor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDto'
+
+components:
+  schemas:
+    PruebaEstudianteDto:
+      type: object
+      properties:
+        eid:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: "Juan Pérez"
+        specialty:
+          type: string
+          example: "Matemáticas"
+        grade:
+          type: string
+          example: "Décimo"
+
+    PruebaEstudianteRequest:
+      type: object
+      properties:
+        nombre:
+          type: string
+          example: "Ana Gómez"
+        especialidad:
+          type: string
+          example: "Física"
+        grado:
+          type: string
+          example: "Once"
+      required:
+        - nombre
+        - especialidad
+        - grado
+
+    ResponseDto:
+      type: object
+      properties:
+        timestamp:
+          type: string
+          format: date-time
+          example: "2024-10-20T22:30:00Z"
+        message:
+          type: string
+          example: "Error interno del servidor"
